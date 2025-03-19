@@ -3,7 +3,6 @@ package demo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -13,14 +12,12 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 
 import demo.utils.ExcelDataProvider;
@@ -32,110 +29,125 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
 
         @Test
         public void testCase01() {
+                //navigate to youtube.com
                 Wrappers.navigate(driver, "https://www.youtube.com/");
                 SoftAssert softAssert = new SoftAssert();
                 String currentURL = driver.getCurrentUrl();
+                //assert youtube url
                 softAssert.assertTrue(currentURL.contains("youtube"), "URL doesn't contains Youtube");
+                
+                //clicking on threebars top left
                 WebElement hamBurgerSign = driver.findElement(By.id("guide-button"));
                 Wrappers.click(hamBurgerSign, driver);
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                
+                //clicking on aboutLink
                 WebElement aboutLink = wait
                                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='About']")));
                 Wrappers.click(aboutLink, driver);
+
+                //validating aboutHeading
                 WebElement aboutHeading = wait.until(ExpectedConditions
                                 .visibilityOfElementLocated(By.xpath("//main[@id='content']/section/h1")));
                 String aboutHeadingText = aboutHeading.getText();
                 softAssert.assertTrue(aboutHeadingText.contains("About"), "Heading doesn't contains About");
+                
+                //softAssert decision making
                 softAssert.assertAll();
         }
 
         @Test
         public void testCase02() throws InterruptedException {
 
+                //navigating to Youtube
                 Wrappers.navigate(driver, "https://www.youtube.com/");
                 SoftAssert softAssert = new SoftAssert();
                 String currentURL = driver.getCurrentUrl();
                 softAssert.assertTrue(currentURL.contains("youtube"), "URL doesn't contains Youtube");
+                
+                //clicking on threebars top left
                 WebElement hamBurgerSign = driver.findElement(By.id("guide-button"));
                 Wrappers.click(hamBurgerSign, driver);
 
-                String movies = "Movies";
-                WebElement moviesButton = driver
-                                .findElement(By.xpath("//yt-formatted-string[text()='" + movies + "']"));
-                Wrappers.click(moviesButton, driver);
+                //moving to desired section
+                Wrappers.moveToDesiredSection(driver, "Movies");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
                 wait.until(ExpectedConditions.urlContains("feed"));
                 Thread.sleep(3000);
+
+               
                 WebElement nextButton = driver.findElement(By.xpath(
                                 "//span[text()='Top selling']/ancestor::div[@id='dismissible']//button[@aria-label='Next']"));
-                Boolean flag = true;
-                while (flag) {
-                        
-                        if (!nextButton.isDisplayed()) {
-                                flag = false; // Exit the loop when no more "next" button is visible
-                        }
-                        else{
-                              Wrappers.click(nextButton, driver);
-                        }   
-                }
+                
+                Wrappers.nextButtonClick(driver, nextButton);
+                
                 System.out.println("Reached last movie tile");
 
+                //Getting Genre
                 WebElement lastMovieGenre = driver.findElement(
                                 By.xpath("(//span[contains(@class,'ytd-grid-movie-renderer')])[position()=last()]"));
                 String lastMovieGenreText = lastMovieGenre.getText();
                 softAssert.assertTrue((lastMovieGenreText.contains("Comedy") || lastMovieGenreText.contains("Animation") || lastMovieGenreText.contains("Drama") ), "Doesn't contains Comedy");
+                
+                //Getting Rating
                 WebElement lastAdultRating = driver.findElement(
                                 By.xpath("(//p[contains(@class,'ytd-badge-supported-renderer')])[position()=last()]"));
                 String lastAdultRatingText = lastAdultRating.getText();
                 softAssert.assertTrue((lastAdultRatingText.contains("U/A") || lastAdultRatingText.equals("A")), "Rating is not A");
 
+                //softAssert decision making
                 softAssert.assertAll();
 
         }
 
         @Test
         public void testCase03() throws InterruptedException {
-
+                //navigating to Youtube.com
                 Wrappers.navigate(driver, "https://www.youtube.com/");
                 SoftAssert softAssert = new SoftAssert();
                 String currentURL = driver.getCurrentUrl();
                 softAssert.assertTrue(currentURL.contains("youtube"), "URL doesn't contains Youtube");
+                
+                //Clicking on Top Left Menu button
                 WebElement hamBurgerSign = driver.findElement(By.id("guide-button"));
                 Wrappers.click(hamBurgerSign, driver);
 
-                String music = "Music";
-                WebElement musicButton = driver.findElement(By.xpath("//yt-formatted-string[text()='" + music + "']"));
-                Wrappers.click(musicButton, driver);
-
-                
+                //Moving to section
+                Wrappers.moveToDesiredSection(driver, "Music");
                 Thread.sleep(3000);
+
+                //Getting last Song Tile
                 WebElement lastMusicTileSongs = driver.findElement(By.xpath(
                                 "//span[text()=\"India's Biggest Hits\"]/ancestor::div[@id='dismissible']//div[@id='contents']//ytd-rich-item-renderer[4]//div[@class='badge-shape-wiz__text']"));
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("var rect = arguments[0].getBoundingClientRect();" +
                                 "window.scrollTo({ top: rect.top + window.pageYOffset - (window.innerHeight / 2), behavior: 'smooth' });",
                                 lastMusicTileSongs);
+                
+                //Getting Number of Songs
                 int numberOfSongsInPlaylist = Integer.parseInt(lastMusicTileSongs.getText().split(" ")[0]);
                 softAssert.assertTrue(numberOfSongsInPlaylist >= 50, "Number of songs are more than 50");
-                softAssert.assertAll();
-                Thread.sleep(3000);
+                
+                //softAssert decision making
+                softAssert.assertAll();    
 
         }
 
         @Test
         public void testCase04() throws InterruptedException {
-
+                //navigating to Youtube.com
                 Wrappers.navigate(driver, "https://www.youtube.com/");
                 SoftAssert softAssert = new SoftAssert();
                 String currentURL = driver.getCurrentUrl();
                 softAssert.assertTrue(currentURL.contains("youtube"), "URL doesn't contains Youtube");
+                
+                //Clicking on Top Left Menu button
                 WebElement hamBurgerSign = driver.findElement(By.id("guide-button"));
                 Wrappers.click(hamBurgerSign, driver);
 
-                String news = "News";
-                WebElement newsButton = driver.findElement(By.xpath("//yt-formatted-string[text()='" + news + "']"));
-                Wrappers.click(newsButton, driver);
+                //Moving to section
+                Wrappers.moveToDesiredSection(driver, "News");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 WebElement newTiles = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Latest news posts']/ancestor::div[@id='dismissible']//span[@id='vote-count-middle']")));
@@ -143,27 +155,13 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
                 js.executeScript("arguments[0].style.display='block'", newTiles);
 
                 List<WebElement> newsTilesLikes = driver.findElements(By.xpath("//span[text()='Latest news posts']/ancestor::div[@id='dismissible']//span[@id='vote-count-middle']"));
-                int limit = 3;
-                int sumOfLikes = 0;
-                for(WebElement element : newsTilesLikes){
-                        if(limit>0){
-                               
-                                String likesCount = element.getText().replaceAll("[^\\d]", "");
-                                try{
-                                        sumOfLikes += Integer.parseInt(likesCount);
-                                        System.out.println(likesCount);
-                                }
-                                catch(Exception e){
-                                        sumOfLikes += 0;
-                                        System.out.println(0);
-                                }
-                                limit--;
-                        }
-                }
+                
+                int sumOfLikes = Wrappers.sumOfLikes(newsTilesLikes);
 
                 System.out.println("Total like of Three tiles: "+ sumOfLikes);
-                Thread.sleep(3000);
 
+                //softAssert decision making
+                softAssert.assertAll();    
         }
 
         @Test
@@ -201,3 +199,4 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
 
         }
 }
+

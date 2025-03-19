@@ -42,6 +42,45 @@ public class Wrappers {
             driver.get(url);
         }
     }
+    
+    public static void moveToDesiredSection(WebDriver driver, String desiredSection){
+        WebElement moviesButton = driver
+                                .findElement(By.xpath("//yt-formatted-string[text()='"+desiredSection+"']"));
+        Wrappers.click(moviesButton, driver);
+    }
+
+    public static void nextButtonClick(WebDriver driver, WebElement nextButton){
+        Boolean flag = true;
+                while (flag) {
+                        if (!nextButton.isDisplayed()) {
+                                flag = false; // Exit the loop when no more "next" button is visible
+                        }
+                        else{
+                              Wrappers.click(nextButton, driver);
+                        }   
+                }
+    }
+
+    public static int sumOfLikes(List<WebElement> newsTilesLikes){
+        int limit = 3;
+        int sumOfLikes = 0;
+        for(WebElement element : newsTilesLikes){
+            if(limit>0){
+                    String likesCount = element.getText().replaceAll("[^\\d]", "");
+                    try{
+                            sumOfLikes += Integer.parseInt(likesCount);
+                            System.out.println(likesCount);
+                    }
+                    catch(Exception e){
+                            sumOfLikes += 0;
+                            System.out.println(0);
+                    }
+                    limit--;
+            }
+        }
+        return sumOfLikes;
+
+    }
 
     public static WebElement findElementWithRetry(WebDriver driver, By by, int retryCount) {
         return driver.findElement(by);
