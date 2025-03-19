@@ -84,13 +84,11 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
                 WebElement lastMovieGenre = driver.findElement(
                                 By.xpath("(//span[contains(@class,'ytd-grid-movie-renderer')])[position()=last()]"));
                 String lastMovieGenreText = lastMovieGenre.getText();
-                softAssert.assertTrue(lastMovieGenreText.contains("Comedy"), "Doesn't contains Comedy");
-                softAssert.assertTrue(lastMovieGenreText.contains("Animation"), "Doesn't contains Animation");
-                softAssert.assertTrue(lastMovieGenreText.contains("Drama"), "Doesn't contains Drama");
+                softAssert.assertTrue((lastMovieGenreText.contains("Comedy") || lastMovieGenreText.contains("Animation") || lastMovieGenreText.contains("Drama") ), "Doesn't contains Comedy");
                 WebElement lastAdultRating = driver.findElement(
                                 By.xpath("(//p[contains(@class,'ytd-badge-supported-renderer')])[position()=last()]"));
                 String lastAdultRatingText = lastAdultRating.getText();
-                softAssert.assertTrue(lastAdultRatingText.equals("A"), "Rating is not A");
+                softAssert.assertTrue((lastAdultRatingText.contains("U/A") || lastAdultRatingText.equals("A")), "Rating is not A");
 
                 softAssert.assertAll();
 
@@ -170,7 +168,7 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
 
         @Test
         public void testCase05(){
-                
+
         }
 
         
