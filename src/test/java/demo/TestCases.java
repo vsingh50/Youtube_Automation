@@ -128,7 +128,6 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
         @Test
         public void testCase04() throws InterruptedException {
 
-                
                 Wrappers.navigate(driver, "https://www.youtube.com/");
                 SoftAssert softAssert = new SoftAssert();
                 String currentURL = driver.getCurrentUrl();
@@ -170,10 +169,11 @@ public class TestCases extends ExcelDataProvider { // Lets us read the data
         }
 
         @Test
-        public void testCase05() {
-
+        public void testCase05(){
+                
         }
 
+        
         @BeforeTest
         public void startBrowser() {
                 System.setProperty("java.util.logging.config.file", "logging.properties");

@@ -2,33 +2,31 @@
 <testng-results total="5" passed="4" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-18T13:16:26Z" name="Test Suite for Buildout" finished-at="2025-03-18T13:16:57Z" duration-ms="31090">
+  <suite started-at="2025-03-19T08:42:39Z" name="Test Suite for Buildout" finished-at="2025-03-19T08:43:25Z" duration-ms="46216">
     <groups>
     </groups>
-    <test started-at="2025-03-18T13:16:26Z" name="Test Cases for Buildout" finished-at="2025-03-18T13:16:57Z" duration-ms="31090">
+    <test started-at="2025-03-19T08:42:39Z" name="Test Cases for Buildout" finished-at="2025-03-19T08:43:25Z" duration-ms="46216">
       <class name="demo.TestCases">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:26Z" name="startBrowser" finished-at="2025-03-18T18:46:28Z" duration-ms="1973" status="PASS">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:12:39Z" name="startBrowser" finished-at="2025-03-19T14:12:42Z" duration-ms="3026" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="testCase01()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:28Z" name="testCase01" finished-at="2025-03-18T18:46:32Z" duration-ms="3953" status="PASS">
+        <test-method signature="testCase01()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:12:42Z" name="testCase01" finished-at="2025-03-19T14:12:48Z" duration-ms="6149" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase01 -->
-        <test-method signature="testCase02()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:32Z" name="testCase02" finished-at="2025-03-18T18:46:37Z" duration-ms="5635" status="FAIL">
+        <test-method signature="testCase02()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:12:48Z" name="testCase02" finished-at="2025-03-19T14:12:56Z" duration-ms="7452" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[The following asserts failed:
 	Doesn't contains Comedy expected [true] but found [false],
 	Doesn't contains Animation expected [true] but found [false],
-	Doesn't contains Drama expected [true] but found [false],
 	Rating is not A expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
               <![CDATA[java.lang.AssertionError: The following asserts failed:
 	Doesn't contains Comedy expected [true] but found [false],
 	Doesn't contains Animation expected [true] but found [false],
-	Doesn't contains Drama expected [true] but found [false],
 	Rating is not A expected [true] but found [false]
 	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
 	at demo.TestCases.testCase02(TestCases.java:95)
@@ -80,19 +78,19 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase02 -->
-        <test-method signature="testCase03()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:37Z" name="testCase03" finished-at="2025-03-18T18:46:45Z" duration-ms="8150" status="PASS">
+        <test-method signature="testCase03()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:12:56Z" name="testCase03" finished-at="2025-03-19T14:13:05Z" duration-ms="9667" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase03 -->
-        <test-method signature="testCase04()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:45Z" name="testCase04" finished-at="2025-03-18T18:46:56Z" duration-ms="10212" status="PASS">
+        <test-method signature="testCase04()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:13:05Z" name="testCase04" finished-at="2025-03-19T14:13:24Z" duration-ms="18840" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase04 -->
-        <test-method signature="testCase05()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:56Z" name="testCase05" finished-at="2025-03-18T18:46:56Z" duration-ms="0" status="PASS">
+        <test-method signature="testCase05()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:13:24Z" name="testCase05" finished-at="2025-03-19T14:13:24Z" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCase05 -->
-        <test-method is-config="true" signature="endTest()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-18T18:46:56Z" name="endTest" finished-at="2025-03-18T18:46:57Z" duration-ms="1155" status="PASS">
+        <test-method is-config="true" signature="endTest()[pri:0, instance:demo.TestCases@68ad99fe]" started-at="2025-03-19T14:13:24Z" name="endTest" finished-at="2025-03-19T14:13:25Z" duration-ms="1048" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endTest -->
